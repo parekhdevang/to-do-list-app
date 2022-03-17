@@ -1,2 +1,20 @@
 # to-do-list-app
-This is a to do list web app
+Usage for mac, on your terminal run the following 
+
+python3 -m venv venv
+. venv/bin/activate
+pip install Flask
+export FLASK_APP=flaskr
+export FLASK_ENV=development
+flask run
+
+
+### to init the database ###
+
+flask init-db
+
+
+
+#### Endpoint #### 
+
+http://127.0.0.1:5000/hello 
