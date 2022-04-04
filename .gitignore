@@ -1,0 +1,16 @@
+
+Pipfile.lock
+*.pyc
+
+
+# Environments
+
+
+env
+venv/ 
+
+
+# DB Binary 
+
+instance/flaskr.sqlite
+
