@@ -12,5 +12,5 @@ venv/
 
 # DB Binary 
 
-instance/flaskr.sqlite
+#instance/flaskr.sqlite
 
