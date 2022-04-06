@@ -2,6 +2,7 @@
     height: 90%;
     width: 100%;
     position: relative;
+    display: flex;
     vertical-align: center;
     align-items: center;
 }
@@ -10,7 +11,7 @@
     width: 100%;
 }
 
-.week-container {
+#week-container {
     display: grid;
     grid-template-columns: 5% 18% 18% 18% 18% 18% 5%;
     width: 100%;
@@ -18,7 +19,7 @@
     margin: 50px 0px;
 }
 
-.week-container > div {
+#week-container > div {
     text-align: center;
 }
 
@@ -79,8 +80,9 @@ button.close {
     border-radius: 10px;
 }
 
-#task-done {
+.task-done {
     background-color: #eaeaf3;
+    text-decoration: line-through;
 }
 
 .task > * {
@@ -98,13 +100,3 @@ button.close {
 .task-done-btn:hover {
     cursor: pointer;
 }
-<<<<<<< Updated upstream
-
-center.homepage-header {
-    background-color: black;
-    color: #ADADC9;
-    padding: 5px;
-    vertical-align: center;
-}
-=======
->>>>>>> Stashed changes

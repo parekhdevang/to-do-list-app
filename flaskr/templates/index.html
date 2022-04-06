@@ -3,14 +3,14 @@
 {% block content%}
 
 <div class="container-main">
-    {% if g.user %}\
-    <div class="week-container">
+    {% if g.user %}
+    <div id="week-container">
         <div id="left-arrow">
-            <button class="arrow-btn" data-toggle="modal" data-target="#todo-form"><ion-icon name="caret-back-outline"></ion-icon></button>
+            <button class="arrow-btn" onclick="goBackADay()"><ion-icon name="caret-back-outline"></ion-icon></button>
         </div>
         <div id="day1" class="day-col">
-            <h3 class="day-of-week">Monday</h3>
-            <p class="date">April 1, 2022</p>
+            <h3 class="day-of-week"></h3>
+            <p class="date"></p>
             <div class="tasks">
                 <div class="task">
                     <button type="submit" class="task-done-btn"><ion-icon name="square-outline"></ion-icon></button><span>Do laundry</span>
@@ -18,15 +18,15 @@
                 <div class="task">
                     <button type="submit" class="task-done-btn"><ion-icon name="square-outline"></ion-icon></button><span>Do dishes</span>
                 </div>
-                <div class="task" id="task-done">
+                <div class="task task-done">
                     <button type="submit" class="task-done-btn"><ion-icon name="checkbox-outline"></ion-icon></button><span>Do homework</span>
                 </div>
             </div>
             <button class="add-todo" data-toggle="modal" data-target="#todo-form"><ion-icon name="add-outline"></ion-icon></button>
         </div>
         <div id="day2" class="day-col">
-            <h3 class="day-of-week">Tuesday</h3>
-            <p class="date">April 2, 2022</p>
+            <h3 class="day-of-week"></h3>
+            <p class="date"></p>
             <div class="tasks"></div>
             <button class="add-todo" data-toggle="modal" data-target="#todo-form"><ion-icon name="add-outline"></ion-icon></button>
         </div>
@@ -48,7 +48,7 @@
             <div class="tasks"></div>
             <button class="add-todo" data-toggle="modal" data-target="#todo-form"><ion-icon name="add-outline"></ion-icon></button>
         </div>
-        <div id="right-arrow">
+        <div id="right-arrow" onclick="goForwardADay()">
             <button class="arrow-btn"><ion-icon name="caret-forward-outline"></ion-icon></button>
         </div>
     </div>
@@ -74,7 +74,7 @@
         </div>
     </div>
     {% else %}
-        <meta http-equiv="refresh" content="1; url = {{ url_for('auth.login') }}" />
+        <meta http-equiv="refresh" content="0; url = {{ url_for('auth.login') }}" />
     {% endif %}
 
 
