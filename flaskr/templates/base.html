@@ -32,11 +32,9 @@
 
 <body>
     <section class="container-fluid">
-        <header>
-            {% block header %}{% endblock %}
-        </header>
+        {% block header %}{% endblock %}
         {% for message in get_flashed_messages() %}
-        <div class="flash">{{ message }}</div>
+            <div class="flash">{{ message }}</div>
         {% endfor %}
         {% block content %}{% endblock %}
     </section>

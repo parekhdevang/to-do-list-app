@@ -2,30 +2,35 @@ html {
     height: 100%;
     width: 100%;
 }
-
 body {
     height: 100%;
     font-family: 'Nunito', sans-serif;
 }
-
 .container-fluid {
     height: 100%;
+    width: 100%;
     padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
-
+.container-fluid > * {
+    display: block;
+    margin: 20px;
+}
 nav > h1 > a {
     color: #ADADC9;
 }
-
 nav a { 
     color: white; 
     text-decoration: none;
 }
-
 nav a:hover { 
     color: #ADADC9;
 }
-
 hr { 
     border: none; 
     border-top: 1px solid lightgray; 
@@ -40,6 +45,7 @@ nav {
 }
 nav > * {
     padding: 0 20px;
+    z-index: 999;
 }
 nav > ul > * {
     padding: 0 10px;
@@ -63,4 +69,7 @@ nav ul li a, nav ul li span, header .action { display: block; padding: 0.5rem; }
 .content input, .content textarea { margin-bottom: 1em; }
 .content textarea { min-height: 12em; resize: vertical; }
 input.danger { color: #cc2f2e; }
-input[type=submit] { align-self: start; min-width: 10em; }
+input[type=submit] { align-self: start; min-width: 10em; width: 100%; }
+form > div {
+    padding: 10px;
+}
