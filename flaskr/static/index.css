@@ -100,3 +100,15 @@ button.close {
 .task-done-btn:hover {
     cursor: pointer;
 }
+
+form > div {
+    padding: 10px;
+}
+
+form > div > input, form > div > textarea {
+    width: 100%;
+}
+
+form > div > select {
+    width: 50%;
+}

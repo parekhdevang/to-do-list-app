@@ -64,7 +64,25 @@
             </button>
             </div>
             <div class="modal-body">
-            ...
+                <form method="post">
+                    <div>
+                        <label for="title">To do</label><br/>
+                        <input name="title" id="title" value="{{ request.form['todo'] }}" required>
+                    </div>
+                    <div>
+                        <label for="body">Comments</label><br/>
+                        <textarea name="body" id="body">{{ request.form['comments'] }}</textarea>
+                    </div>
+                    <div>
+                        <label for="body">Repeat</label><br/>
+                        <select data-placeholder="Repeat" multiple>
+                            <option>Every day</option>
+                            <option>Every week</option>
+                            <option>Every month</option>
+                            <option>Every year</option>
+                        </select>
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
