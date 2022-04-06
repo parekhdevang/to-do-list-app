@@ -1,0 +1,121 @@
+html {
+    height: 100%;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    height: 100%;
+}
+
+.container-fluid {
+    height: 100%;
+    padding: 0;
+}
+
+.container-main {
+    height: 90%;
+    width: 100%;
+    position: relative;
+    vertical-align: center;
+    align-items: center;
+}
+
+.container-main > h1 {
+    width: 100%;
+}
+
+.week-container {
+    display: grid;
+    grid-template-columns: 5% 18% 18% 18% 18% 18% 5%;
+    width: 100%;
+    height: 90%;
+    margin: 50px 0px;
+}
+
+.week-container > div {
+    text-align: center;
+}
+
+.day-col {
+    height: 100%;
+    border-left-color: #ADADC9;
+    border-left-width: 1px;
+    border-left-style: solid;
+}
+
+#right-arrow {
+    border-left-color: #ADADC9;
+    border-left-width: 1px;
+    border-left-style: solid;
+}
+
+.arrow-btn {
+    border: none;
+    text-align: center;
+    font-size: 30px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    background-color: #ADADC9;
+    color: white;
+}
+
+.add-todo {
+    border: none;
+    text-align: center;
+    font-size: 20px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+#left-arrow, #right-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+button.close {
+    background-color: white;
+    border: none;
+}
+
+.task {
+    display: flex;
+    margin: 5px;
+    padding: 5px;
+    align-items: left;
+    vertical-align: center;
+    background-color: #c6c6dd;
+    border-radius: 10px;
+}
+
+#task-done {
+    background-color: #eaeaf3;
+}
+
+.task > * {
+    margin: 0 3px;
+    display: flex;
+    vertical-align: center;
+}
+
+.task-done-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+}
+
+.task-done-btn:hover {
+    cursor: pointer;
+}
+
+center.homepage-header {
+    background-color: black;
+    color: #ADADC9;
+    padding: 5px;
+    vertical-align: center;
+}
