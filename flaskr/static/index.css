@@ -1,17 +1,3 @@
-html {
-    height: 100%;
-}
-
-body {
-    font-family: 'Nunito', sans-serif;
-    height: 100%;
-}
-
-.container-fluid {
-    height: 100%;
-    padding: 0;
-}
-
 .container-main {
     height: 90%;
     width: 100%;
@@ -112,6 +98,7 @@ button.close {
 .task-done-btn:hover {
     cursor: pointer;
 }
+<<<<<<< Updated upstream
 
 center.homepage-header {
     background-color: black;
@@ -119,3 +106,5 @@ center.homepage-header {
     padding: 5px;
     vertical-align: center;
 }
+=======
+>>>>>>> Stashed changes

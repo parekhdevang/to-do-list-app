@@ -3,9 +3,7 @@
 {% block content%}
 
 <div class="container-main">
-    {% if current_user.is_authenticated %}
-
-    <center class="homepage-header"><h2>{{ current_user.username }}'s TODOs</h2></center>
+    {% if g.user %}\
     <div class="week-container">
         <div id="left-arrow">
             <button class="arrow-btn" data-toggle="modal" data-target="#todo-form"><ion-icon name="caret-back-outline"></ion-icon></button>
@@ -75,9 +73,8 @@
         </div>
         </div>
     </div>
-
     {% else %}
-        You must login.
+        <meta http-equiv="refresh" content="1; url = {{ url_for('auth.login') }}" />
     {% endif %}
 
 
