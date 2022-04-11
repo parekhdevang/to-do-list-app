@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block title%} {{ title }} {% endblock %}
+{% block content%}
+
+<div class="container-main">
+    {% if g.user %}
+    <div id="week-container">
+        <div id="left-arrow">
+            <button class="arrow-btn" onclick="goBackADay()"><ion-icon name="caret-back-outline"></ion-icon></button>
+        </div>
+        <div id="day1" class="day-col">
+            <h3 class="day-of-week"></h3>
+            <p class="date"></p>
+            <div class="tasks">
+                <div class="task">
+                    <button type="submit" class="task-done-btn"><ion-icon name="square-outline"></ion-icon></button><span>Do laundry</span>
+                </div>
+                <div class="task">
+                    <button type="submit" class="task-done-btn"><ion-icon name="square-outline"></ion-icon></button><span>Do dishes</span>
+                </div>
+                <div class="task task-done">
+                    <button type="submit" class="task-done-btn"><ion-icon name="checkbox-outline"></ion-icon></button><span>Do homework</span>
+                </div>
+            </div>
+            <button class="add-todo" data-toggle="modal" data-target="#todo-form"><ion-icon name="add-outline"></ion-icon></button>
+        </div>
+        <div id="day2" class="day-col">
+            <h3 class="day-of-week"></h3>
+            <p class="date"></p>
+            <div class="tasks"></div>
+            <button class="add-todo" data-toggle="modal" data-target="#todo-form"><ion-icon name="add-outline"></ion-icon></button>
+        </div>
+        <div id="day3" class="day-col">
+            <h3 class="day-of-week"></h3>
+            <p class="date"></p>
+            <div class="tasks"></div>
+            <button class="add-todo" data-toggle="modal" data-target="#todo-form"><ion-icon name="add-outline"></ion-icon></button>
+        </div>
+        <div id="day4" class="day-col">
+            <h3 class="day-of-week"></h3>
+            <p class="date"></p>
+            <div class="tasks"></div>
+            <button class="add-todo" data-toggle="modal" data-target="#todo-form"><ion-icon name="add-outline"></ion-icon></button>
+        </div>
+        <div id="day5" class="day-col">
+            <h3 class="day-of-week"></h3>
+            <p class="date"></p>
+            <div class="tasks"></div>
+            <button class="add-todo" data-toggle="modal" data-target="#todo-form"><ion-icon name="add-outline"></ion-icon></button>
+        </div>
+        <div id="right-arrow" onclick="goForwardADay()">
+            <button class="arrow-btn"><ion-icon name="caret-forward-outline"></ion-icon></button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="todo-form" tabindex="-1" role="dialog" aria-labelledby="todo-form" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="todo-form-title">Todo Item</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <form method="post">
+                    <div>
+                        <label for="title">To do</label><br/>
+                        <input name="title" id="title" value="{{ request.form['todo'] }}" required>
+                    </div>
+                    <div>
+                        <label for="body">Comments</label><br/>
+                        <textarea name="body" id="body">{{ request.form['comments'] }}</textarea>
+                    </div>
+                    <div>
+                        <label for="body">Repeat</label><br/>
+                        <select data-placeholder="Repeat" multiple>
+                            <option>Every day</option>
+                            <option>Every week</option>
+                            <option>Every month</option>
+                            <option>Every year</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    {% else %}
+        <meta http-equiv="refresh" content="0; url = {{ url_for('auth.login') }}" />
+    {% endif %}
+
+
+</div>
+{% endblock %}
