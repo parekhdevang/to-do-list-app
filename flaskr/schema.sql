@@ -1,5 +1,4 @@
 DROP TABLE IF EXISTS user;
-DROP TABLE IF EXISTS post;
 DROP TABLE IF EXISTS task;
 
 CREATE TABLE user (
@@ -12,9 +11,9 @@ CREATE TABLE task (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   title TEXT NOT NULL,
   created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  created_by TEXT NOT NULL,
-  completed_date TIMESTAMP NULL,
+  author_id INTEGER NOT NULL,
+  due_date TIMESTAMP NULL,
   is_completed BOOLEAN NOT NULL DEFAULT(0),
   comment TEXT NULL,
-  FOREIGN KEY (created_by) REFERENCES user (username)
+  FOREIGN KEY (author_id) REFERENCES user (id)
 );

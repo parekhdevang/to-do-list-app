@@ -14,19 +14,21 @@ bp = Blueprint('blog', __name__)
 def index():
     db = get_db()
     posts = db.execute(
-        'SELECT id, title, created, created_by, comment, is_completed'
-        ' FROM task ORDER BY id'
+        'SELECT t.id, t.title, t.created, u.username, t.comment, t.is_completed'
+        ' FROM task t JOIN user u ON u.id = t.author_id'
+        ' ORDER BY t.id'
     ).fetchall()
     return render_template('blog/index.html', posts=posts)
 
-@bp.route('/<string:username>/tasklist')
+@bp.route('/<int:userid>/tasklist')
 @login_required
-def get_list(username):
+def get_list(userid):
     db = get_db()
     posts = db.execute(
-        'SELECT id, title, created, created_by, comment, is_completed'
-        ' FROM task WHERE created_by = ?'
-        ' ORDER BY id', (username)
+        'SELECT t.id, t.title, t.created, t.comment, t.is_completed, u.username'
+        ' FROM task t JOIN user u ON u.id = t.author_id'
+        ' WHERE u.id = ?'
+        ' ORDER BY t.id', (userid)
     ).fetchall()
     return render_template('blog/index.html', posts=posts)
 
@@ -46,9 +48,9 @@ def create():
         else:
             db = get_db()
             db.execute(
-                'INSERT INTO task (title, created_by, comment)'
+                'INSERT INTO task (title, author_id, comment)'
                 ' VALUES (?, ?, ?)',
-                (title, g.user['username'], comment)
+                (title, g.user['id'], comment)
             )
             db.commit()
             return redirect(url_for('blog.index'))
@@ -58,8 +60,8 @@ def create():
 
 def get_post(id, check_author=True):
     post = get_db().execute(
-        'SELECT t.id, title, created, created_by, comment'
-        ' FROM task t JOIN user u ON t.created_by = u.username'
+        'SELECT t.id, t.title, t.created, u.username, t.comment'
+        ' FROM task t JOIN user u ON t.author_id = u.id'
         ' WHERE t.id = ?',
         (id,)
     ).fetchone()
@@ -67,7 +69,7 @@ def get_post(id, check_author=True):
     if post is None:
         abort(404, f"Task id {id} doesn't exist.")
 
-    if check_author and post['created_by'] != g.user['username']:
+    if check_author and post['author_id'] != g.user['id']:
         abort(403)
 
     return post
@@ -116,9 +118,9 @@ def completed(id):
         else:
             db = get_db()
             db.execute(
-                'UPDATE task SET is_done = ?, completed_date = ?'
+                'UPDATE task SET is_done = ?'
                 ' WHERE id = ?',
-                (1, datetime.utcnow(), id)
+                (1, id)
             )
             db.commit()
             return redirect(url_for('blog.index'))
