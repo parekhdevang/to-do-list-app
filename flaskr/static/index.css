@@ -38,6 +38,11 @@
 
 .arrow-btn {
     border: none;
+    background-color: white;
+}
+
+.arrow-btn > a {
+    border: none;
     text-align: center;
     font-size: 30px;
     margin: 0 auto;

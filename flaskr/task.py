@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for
 )
@@ -7,30 +7,69 @@ from werkzeug.exceptions import abort
 from flaskr.auth import login_required
 from flaskr.db import get_db
 
-bp = Blueprint('blog', __name__)
+bp = Blueprint('task', __name__)
 
 @bp.route('/')
 @login_required
 def index():
-    db = get_db()
-    posts = db.execute(
-        'SELECT t.id, t.title, t.created, u.username, t.comment, t.is_completed'
-        ' FROM task t JOIN user u ON u.id = t.author_id'
-        ' ORDER BY t.id'
-    ).fetchall()
-    return render_template('blog/index.html', posts=posts)
+    return redirect(url_for('task.tasks'))
 
-@bp.route('/<int:userid>/tasklist')
+@bp.route('/tasks')
 @login_required
-def get_list(userid):
+def tasks():
+    return redirect(url_for('task.get_list', userid=g.user['id'], firstdate=datetime.now().today().date()))
+
+
+@bp.route('/<currentdate>/movebackaday')
+@login_required
+def move_back_a_day(currentdate):
+    day_before = datetime.strptime(currentdate, '%Y-%m-%d') - timedelta(days=1)
+    return redirect(url_for('task.get_list', userid=g.user['id'], firstdate=day_before.date()))
+
+@bp.route('/<currentdate>/moveforwardaday')
+@login_required
+def move_forward_a_day(currentdate):
+    day_after = datetime.strptime(currentdate, '%Y-%m-%d') + timedelta(days=1)
+    return redirect(url_for('task.get_list', userid=g.user['id'], firstdate=day_after.date()))
+
+
+@bp.route('/<int:userid>/<firstdate>/tasklist', methods=('GET', 'POST'))
+@login_required
+def get_list(userid, firstdate):
+    if request.method == 'POST':
+        title = request.form['title']
+        comment = request.form['comment']
+        due_date = request.form['due_date']
+        error = ""
+
+        if not title:
+            error = 'Title is required. '
+        if not due_date:
+            error += 'Date is required.'
+
+        if error:
+            flash(error)
+        else:
+            db = get_db()
+            db.execute(
+                "INSERT INTO task (title, author_id, comment, due_date)"
+                " VALUES (?, ?, ?, ?)",
+                (title, g.user['id'], comment, due_date)
+            )
+            db.commit()
+
     db = get_db()
-    posts = db.execute(
-        'SELECT t.id, t.title, t.created, t.comment, t.is_completed, u.username'
-        ' FROM task t JOIN user u ON u.id = t.author_id'
-        ' WHERE u.id = ?'
-        ' ORDER BY t.id', (userid)
-    ).fetchall()
-    return render_template('blog/index.html', posts=posts)
+    tasks_all = []
+    for i in range(5):
+        date = datetime.strptime(firstdate, '%Y-%m-%d') + timedelta(days=i)
+        tasks = db.execute(
+            'SELECT t.title, t.comment, t.is_completed, t.due_date'
+            ' FROM task t JOIN user u ON u.id = t.author_id'
+            ' WHERE u.id = ? AND t.due_date = ?'
+            ' ORDER BY t.id', (userid, date.date())
+        ).fetchall()
+        tasks_all.append(tasks)
+    return render_template('index.html', tasks=tasks_all, firstdate=firstdate)
 
 @bp.route('/create', methods=('GET', 'POST'))
 @login_required
@@ -38,12 +77,15 @@ def create():
     if request.method == 'POST':
         title = request.form['title']
         comment = request.form['comment']
-        error = None
+        due_date = request.form['due_date']
+        error = ""
 
         if not title:
-            error = 'Title is required.'
+            error = 'Title is required. '
+        if not due_date:
+            error += 'Date is required.'
 
-        if error is not None:
+        if error:
             flash(error)
         else:
             db = get_db()
@@ -53,9 +95,9 @@ def create():
                 (title, g.user['id'], comment)
             )
             db.commit()
-            return redirect(url_for('blog.index'))
+            return redirect(url_for('task.index'))
 
-    return render_template('blog/create.html')
+    return render_template('index.html')
 
 
 def get_post(id, check_author=True):

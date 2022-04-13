@@ -12,7 +12,7 @@ CREATE TABLE task (
   title TEXT NOT NULL,
   created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   author_id INTEGER NOT NULL,
-  due_date TIMESTAMP NULL,
+  due_date DATE NULL,
   is_completed BOOLEAN NOT NULL DEFAULT(0),
   comment TEXT NULL,
   FOREIGN KEY (author_id) REFERENCES user (id)
