@@ -18,7 +18,7 @@
                         <a href="{{ url_for('task.completed', id=task.id, currentdate=firstdate) }}">
                             <ion-icon name="{{ 'checkbox-outline' if task.is_completed else 'square-outline' }}"></ion-icon>
                         </a>
-                    </button><span>{{ task.title }}</span>
+                    </button><span>{{ task.title }}</span><span class="tooltiptext">{{ task.comment }}</span>
                 </div>
             {% endfor %}
             </div>
@@ -34,7 +34,7 @@
                         <a href="{{ url_for('task.completed', id=task.id, currentdate=firstdate) }}">
                             <ion-icon name="{{ 'checkbox-outline' if task.is_completed else 'square-outline' }}"></ion-icon>
                         </a>
-                    </button><span>{{ task.title }}</span>
+                    </button><span>{{ task.title }}</span><span class="tooltiptext">{{ task.comment }}</span>
                 </div>
                 {% endfor %}
             </div>
@@ -50,7 +50,7 @@
                         <a href="{{ url_for('task.completed', id=task.id, currentdate=firstdate) }}">
                             <ion-icon name="{{ 'checkbox-outline' if task.is_completed else 'square-outline' }}"></ion-icon>
                         </a>
-                    </button><span>{{ task.title }}</span>
+                    </button><span>{{ task.title }}</span><span class="tooltiptext">{{ task.comment }}</span>
                 </div>
                 {% endfor %}
             </div>
@@ -66,7 +66,7 @@
                         <a href="{{ url_for('task.completed', id=task.id, currentdate=firstdate) }}">
                             <ion-icon name="{{ 'checkbox-outline' if task.is_completed else 'square-outline' }}"></ion-icon>
                         </a>
-                    </button><span>{{ task.title }}</span>
+                    </button><span>{{ task.title }}</span><span class="tooltiptext">{{ task.comment }}</span>
                 </div>
                 {% endfor %}
             </div>
@@ -82,7 +82,7 @@
                         <a href="{{ url_for('task.completed', id=task.id, currentdate=firstdate) }}">
                             <ion-icon name="{{ 'checkbox-outline' if task.is_completed else 'square-outline' }}"></ion-icon>
                         </a>
-                    </button><span>{{ task.title }}</span>
+                    </button><span>{{ task.title }}</span><span class="tooltiptext">{{ task.comment }}</span>
                 </div>
                 {% endfor %}
             </div>
