@@ -15,7 +15,7 @@
             {% for task in tasks[0] %}
                 <div class="task {{ 'task-done' if task.is_completed else '' }}">
                     <button type="submit" id="{{ task.id }}" class="task-done-btn" onclick="markTaskCompleted(this)">
-                        <a href="{{ url_for('task.completed', id=task.id, currentdate=firstdate) }}">
+                        <a href="{{ url_for('task.completed', id=task.id, currentdate=firstdate, is_completed=task.is_completed) }}">
                             <ion-icon name="{{ 'checkbox-outline' if task.is_completed else 'square-outline' }}"></ion-icon>
                         </a>
                     </button><span>{{ task.title }}</span><span class="tooltiptext">{{ task.comment }}</span>
@@ -31,7 +31,7 @@
                 {% for task in tasks[1] %}
                 <div class="task {{ 'task-done' if task.is_completed else '' }}">
                     <button type="submit" id="{{ task.id }}" class="task-done-btn" onclick="markTaskCompleted(this)">
-                        <a href="{{ url_for('task.completed', id=task.id, currentdate=firstdate) }}">
+                        <a href="{{ url_for('task.completed', id=task.id, currentdate=firstdate, is_completed=task.is_completed) }}">
                             <ion-icon name="{{ 'checkbox-outline' if task.is_completed else 'square-outline' }}"></ion-icon>
                         </a>
                     </button><span>{{ task.title }}</span><span class="tooltiptext">{{ task.comment }}</span>
@@ -47,7 +47,7 @@
                 {% for task in tasks[2] %}
                 <div class="task {{ 'task-done' if task.is_completed else '' }}">
                     <button type="submit" id="{{ task.id }}" class="task-done-btn" onclick="markTaskCompleted(this)">
-                        <a href="{{ url_for('task.completed', id=task.id, currentdate=firstdate) }}">
+                        <a href="{{ url_for('task.completed', id=task.id, currentdate=firstdate, is_completed=task.is_completed) }}">
                             <ion-icon name="{{ 'checkbox-outline' if task.is_completed else 'square-outline' }}"></ion-icon>
                         </a>
                     </button><span>{{ task.title }}</span><span class="tooltiptext">{{ task.comment }}</span>
@@ -63,7 +63,7 @@
                 {% for task in tasks[3] %}
                 <div class="task {{ 'task-done' if task.is_completed else '' }}">
                     <button type="submit" id="{{ task.id }}" class="task-done-btn" onclick="markTaskCompleted(this)">
-                        <a href="{{ url_for('task.completed', id=task.id, currentdate=firstdate) }}">
+                        <a href="{{ url_for('task.completed', id=task.id, currentdate=firstdate, is_completed=task.is_completed) }}">
                             <ion-icon name="{{ 'checkbox-outline' if task.is_completed else 'square-outline' }}"></ion-icon>
                         </a>
                     </button><span>{{ task.title }}</span><span class="tooltiptext">{{ task.comment }}</span>
@@ -79,7 +79,7 @@
                 {% for task in tasks[4] %}
                 <div class="task {{ 'task-done' if task.is_completed else '' }}">
                     <button type="submit" id="{{ task.id }}" class="task-done-btn" onclick="markTaskCompleted(this)">
-                        <a href="{{ url_for('task.completed', id=task.id, currentdate=firstdate) }}">
+                        <a href="{{ url_for('task.completed', id=task.id, currentdate=firstdate, is_completed=task.is_completed) }}">
                             <ion-icon name="{{ 'checkbox-outline' if task.is_completed else 'square-outline' }}"></ion-icon>
                         </a>
                     </button><span>{{ task.title }}</span><span class="tooltiptext">{{ task.comment }}</span>

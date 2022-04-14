@@ -143,14 +143,14 @@ def update(id):
 
     return render_template('blog/update.html', post=post)
 
-@bp.route('/<int:id>/<currentdate>/completed', methods=('GET', 'POST'))
+@bp.route('/<int:id>/<currentdate>/<is_completed>/completed', methods=('GET', 'POST'))
 @login_required
-def completed(id, currentdate):
+def completed(id, currentdate, is_completed):
     db = get_db()
     db.execute(
         'UPDATE task SET is_completed = ?'
         ' WHERE id = ?',
-        (1, id)
+        (1 if int(is_completed) == 0 else 0, id)
     )
     db.commit()
     return redirect(url_for('task.get_list', userid=g.user['id'], firstdate=datetime.strptime(currentdate, '%Y-%m-%d').date()))
