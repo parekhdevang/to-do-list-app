@@ -141,3 +141,17 @@ form > div > select {
 .task:hover .tooltiptext {
     visibility: visible;
 }
+
+.trash-btn {
+    position: absolute;
+    right: 0;
+    border: none;
+    background-color: transparent;
+}
+
+.trash-btn > a {
+    color: black;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+}

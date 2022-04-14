@@ -155,10 +155,9 @@ def completed(id, currentdate, is_completed):
     db.commit()
     return redirect(url_for('task.get_list', userid=g.user['id'], firstdate=datetime.strptime(currentdate, '%Y-%m-%d').date()))
 
-@bp.route('/<int:id>/<currentdate>/delete', methods=('POST',))
+@bp.route('/<int:id>/<currentdate>/delete', methods=('POST', 'GET'))
 @login_required
 def delete(id, currentdate):
-    get_post(id)
     db = get_db()
     db.execute('DELETE FROM task WHERE id = ?', (id,))
     db.commit()

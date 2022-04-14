@@ -19,6 +19,11 @@
                             <ion-icon name="{{ 'checkbox-outline' if task.is_completed else 'square-outline' }}"></ion-icon>
                         </a>
                     </button><span>{{ task.title }}</span><span class="tooltiptext">{{ task.comment }}</span>
+                    <button class="trash-btn">
+                        <a href="{{ url_for('task.delete', id=task.id, currentdate=firstdate) }}">
+                            <ion-icon name="trash"></ion-icon>
+                        </a>
+                    </button>
                 </div>
             {% endfor %}
             </div>
@@ -35,6 +40,11 @@
                             <ion-icon name="{{ 'checkbox-outline' if task.is_completed else 'square-outline' }}"></ion-icon>
                         </a>
                     </button><span>{{ task.title }}</span><span class="tooltiptext">{{ task.comment }}</span>
+                    <button class="trash-btn">
+                        <a href="{{ url_for('task.delete', id=task.id, currentdate=firstdate) }}">
+                            <ion-icon name="trash"></ion-icon>
+                        </a>
+                    </button>
                 </div>
                 {% endfor %}
             </div>
@@ -51,6 +61,11 @@
                             <ion-icon name="{{ 'checkbox-outline' if task.is_completed else 'square-outline' }}"></ion-icon>
                         </a>
                     </button><span>{{ task.title }}</span><span class="tooltiptext">{{ task.comment }}</span>
+                    <button class="trash-btn">
+                        <a href="{{ url_for('task.delete', id=task.id, currentdate=firstdate) }}">
+                            <ion-icon name="trash"></ion-icon>
+                        </a>
+                    </button>
                 </div>
                 {% endfor %}
             </div>
@@ -67,6 +82,11 @@
                             <ion-icon name="{{ 'checkbox-outline' if task.is_completed else 'square-outline' }}"></ion-icon>
                         </a>
                     </button><span>{{ task.title }}</span><span class="tooltiptext">{{ task.comment }}</span>
+                    <button class="trash-btn">
+                        <a href="{{ url_for('task.delete', id=task.id, currentdate=firstdate) }}">
+                            <ion-icon name="trash"></ion-icon>
+                        </a>
+                    </button>
                 </div>
                 {% endfor %}
             </div>
@@ -83,6 +103,11 @@
                             <ion-icon name="{{ 'checkbox-outline' if task.is_completed else 'square-outline' }}"></ion-icon>
                         </a>
                     </button><span>{{ task.title }}</span><span class="tooltiptext">{{ task.comment }}</span>
+                    <button class="trash-btn">
+                        <a href="{{ url_for('task.delete', id=task.id, currentdate=firstdate) }}">
+                            <ion-icon name="trash"></ion-icon>
+                        </a>
+                    </button>
                 </div>
                 {% endfor %}
             </div>
