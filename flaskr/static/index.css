@@ -38,6 +38,11 @@
 
 .arrow-btn {
     border: none;
+    background-color: white;
+}
+
+.arrow-btn > a {
+    border: none;
     text-align: center;
     font-size: 30px;
     margin: 0 auto;
@@ -72,12 +77,12 @@ button.close {
 
 .task {
     display: flex;
-    margin: 5px;
+    margin: 5px ;
     padding: 5px;
-    align-items: left;
-    vertical-align: center;
+    align-items: center;
     background-color: #c6c6dd;
     border-radius: 10px;
+    position: relative;
 }
 
 .task-done {
@@ -97,6 +102,13 @@ button.close {
     font-size: 20px;
 }
 
+.task-done-btn > a {
+    color: black;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+}
+
 .task-done-btn:hover {
     cursor: pointer;
 }
@@ -111,4 +123,21 @@ form > div > input, form > div > textarea {
 
 form > div > select {
     width: 50%;
+}
+
+.tooltiptext {
+    visibility: hidden;
+    background-color: black;
+    opacity: 0.8;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    padding: 10px;
+    position: absolute;
+    left: 100px;
+    z-index: 1;
+}
+
+.task:hover .tooltiptext {
+    visibility: visible;
 }
