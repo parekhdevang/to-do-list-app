@@ -63,7 +63,7 @@ def get_list(userid, firstdate):
     for i in range(5):
         date = datetime.strptime(firstdate, '%Y-%m-%d') + timedelta(days=i)
         tasks = db.execute(
-            'SELECT t.title, t.comment, t.is_completed, t.due_date'
+            'SELECT t.id, t.title, t.comment, t.is_completed, t.due_date'
             ' FROM task t JOIN user u ON u.id = t.author_id'
             ' WHERE u.id = ? AND t.due_date = ?'
             ' ORDER BY t.id', (userid, date.date())
@@ -143,37 +143,23 @@ def update(id):
 
     return render_template('blog/update.html', post=post)
 
-@bp.route('/<int:id>/completed', methods=('GET', 'POST'))
+@bp.route('/<int:id>/<currentdate>/completed', methods=('GET', 'POST'))
 @login_required
-def completed(id):
-    post = get_post(id)
+def completed(id, currentdate):
+    db = get_db()
+    db.execute(
+        'UPDATE task SET is_completed = ?'
+        ' WHERE id = ?',
+        (1, id)
+    )
+    db.commit()
+    return redirect(url_for('task.get_list', userid=g.user['id'], firstdate=datetime.strptime(currentdate, '%Y-%m-%d').date()))
 
-    if request.method == 'POST':
-        completed = request.form['is_done']
-        error = None
-
-        if completed == False:
-            error = 'Task could not complete yet.'
-
-        if error is not None:
-            flash(error)
-        else:
-            db = get_db()
-            db.execute(
-                'UPDATE task SET is_done = ?'
-                ' WHERE id = ?',
-                (1, id)
-            )
-            db.commit()
-            return redirect(url_for('blog.index'))
-
-    return render_template('blog/completed.html', post=post)
-
-@bp.route('/<int:id>/delete', methods=('POST',))
+@bp.route('/<int:id>/<currentdate>/delete', methods=('POST',))
 @login_required
-def delete(id):
+def delete(id, currentdate):
     get_post(id)
     db = get_db()
     db.execute('DELETE FROM task WHERE id = ?', (id,))
     db.commit()
-    return redirect(url_for('blog.index'))
+    return redirect(url_for('task.get_list', userid=g.user['id'], firstdate=datetime.strptime(currentdate, '%Y-%m-%d').date()))

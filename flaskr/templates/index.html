@@ -12,11 +12,15 @@
             <h3 class="day-of-week"></h3>
             <p class="date"></p>
             <div class="tasks">
-                {% for task in tasks[0] %}
-                    <div class="task {{ 'task-done' if task.is_completed else '' }}">
-                        <button type="submit" id="{{ task.id }}" class="task-done-btn" onclick="markTaskCompleted(this)"><ion-icon name="{{ 'checkbox-outline' if task.is_completed else 'square-outline' }}"></ion-icon></button><span>{{ task.title }}</span>
-                    </div>
-                {% endfor %}
+            {% for task in tasks[0] %}
+                <div class="task {{ 'task-done' if task.is_completed else '' }}">
+                    <button type="submit" id="{{ task.id }}" class="task-done-btn" onclick="markTaskCompleted(this)">
+                        <a href="{{ url_for('task.completed', id=task.id, currentdate=firstdate) }}">
+                            <ion-icon name="{{ 'checkbox-outline' if task.is_completed else 'square-outline' }}"></ion-icon>
+                        </a>
+                    </button><span>{{ task.title }}</span>
+                </div>
+            {% endfor %}
             </div>
             <button class="add-todo" data-toggle="modal" data-target="#todo-form" onclick="fillDateField(this)"><ion-icon name="add-outline"></ion-icon></button>
         </div>
@@ -25,9 +29,13 @@
             <p class="date"></p>
             <div class="tasks">
                 {% for task in tasks[1] %}
-                    <div class="task {{ 'task-done' if task.is_completed else '' }}">
-                        <button type="submit" id="{{ task.id }}" class="task-done-btn" onclick="markTaskCompleted(this)"><ion-icon name="{{ 'checkbox-outline' if task.is_completed else 'square-outline' }}"></ion-icon></button><span>{{ task.title }}</span>
-                    </div>
+                <div class="task {{ 'task-done' if task.is_completed else '' }}">
+                    <button type="submit" id="{{ task.id }}" class="task-done-btn" onclick="markTaskCompleted(this)">
+                        <a href="{{ url_for('task.completed', id=task.id, currentdate=firstdate) }}">
+                            <ion-icon name="{{ 'checkbox-outline' if task.is_completed else 'square-outline' }}"></ion-icon>
+                        </a>
+                    </button><span>{{ task.title }}</span>
+                </div>
                 {% endfor %}
             </div>
             <button class="add-todo" data-toggle="modal" data-target="#todo-form" onclick="fillDateField(this)"><ion-icon name="add-outline"></ion-icon></button>
@@ -37,9 +45,13 @@
             <p class="date"></p>
             <div class="tasks">
                 {% for task in tasks[2] %}
-                    <div class="task {{ 'task-done' if task.is_completed else '' }}">
-                        <button type="submit" id="{{ task.id }}" class="task-done-btn" onclick="markTaskCompleted(this)"><ion-icon name="{{ 'checkbox-outline' if task.is_completed else 'square-outline' }}"></ion-icon></button><span>{{ task.title }}</span>
-                    </div>
+                <div class="task {{ 'task-done' if task.is_completed else '' }}">
+                    <button type="submit" id="{{ task.id }}" class="task-done-btn" onclick="markTaskCompleted(this)">
+                        <a href="{{ url_for('task.completed', id=task.id, currentdate=firstdate) }}">
+                            <ion-icon name="{{ 'checkbox-outline' if task.is_completed else 'square-outline' }}"></ion-icon>
+                        </a>
+                    </button><span>{{ task.title }}</span>
+                </div>
                 {% endfor %}
             </div>
             <button class="add-todo" data-toggle="modal" data-target="#todo-form" onclick="fillDateField(this)"><ion-icon name="add-outline"></ion-icon></button>
@@ -49,9 +61,13 @@
             <p class="date"></p>
             <div class="tasks">
                 {% for task in tasks[3] %}
-                    <div class="task {{ 'task-done' if task.is_completed else '' }}">
-                        <button type="submit" id="{{ task.id }}" class="task-done-btn" onclick="markTaskCompleted(this)"><ion-icon name="{{ 'checkbox-outline' if task.is_completed else 'square-outline' }}"></ion-icon></button><span>{{ task.title }}</span>
-                    </div>
+                <div class="task {{ 'task-done' if task.is_completed else '' }}">
+                    <button type="submit" id="{{ task.id }}" class="task-done-btn" onclick="markTaskCompleted(this)">
+                        <a href="{{ url_for('task.completed', id=task.id, currentdate=firstdate) }}">
+                            <ion-icon name="{{ 'checkbox-outline' if task.is_completed else 'square-outline' }}"></ion-icon>
+                        </a>
+                    </button><span>{{ task.title }}</span>
+                </div>
                 {% endfor %}
             </div>
             <button class="add-todo" data-toggle="modal" data-target="#todo-form" onclick="fillDateField(this)"><ion-icon name="add-outline"></ion-icon></button>
@@ -61,9 +77,13 @@
             <p class="date"></p>
             <div class="tasks">
                 {% for task in tasks[4] %}
-                    <div class="task {{ 'task-done' if task.is_completed else '' }}">
-                        <button type="submit" id="{{ task.id }}" class="task-done-btn" onclick="markTaskCompleted(this)"><ion-icon name="{{ 'checkbox-outline' if task.is_completed else 'square-outline' }}"></ion-icon></button><span>{{ task.title }}</span>
-                    </div>
+                <div class="task {{ 'task-done' if task.is_completed else '' }}">
+                    <button type="submit" id="{{ task.id }}" class="task-done-btn" onclick="markTaskCompleted(this)">
+                        <a href="{{ url_for('task.completed', id=task.id, currentdate=firstdate) }}">
+                            <ion-icon name="{{ 'checkbox-outline' if task.is_completed else 'square-outline' }}"></ion-icon>
+                        </a>
+                    </button><span>{{ task.title }}</span>
+                </div>
                 {% endfor %}
             </div>
             <button class="add-todo" data-toggle="modal" data-target="#todo-form" onclick="fillDateField(this)"><ion-icon name="add-outline"></ion-icon></button>

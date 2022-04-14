@@ -24,7 +24,6 @@ function getYesterdayDate(today) {
 function setDates() {
     let weekContainer = document.getElementById("week-container");
     let children = weekContainer.children;
-    console.log(`name ${weekContainer.className}`)
     var date = new Date(weekContainer.className);
     for (var i=0; i<children.length; i++) {
         if (children[i].className === "day-col") {
