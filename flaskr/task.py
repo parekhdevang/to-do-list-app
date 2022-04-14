@@ -37,48 +37,7 @@ def move_forward_a_day(currentdate):
 @login_required
 def get_list(userid, firstdate):
     if request.method == 'POST':
-        title = request.form['title']
-        comment = request.form['comment']
-        due_date = request.form['due_date']
-        repeat = request.form['repeat'].lower()
-        error = ""
-
-        if not title:
-            error = 'Title is required. '
-        if not due_date:
-            error += 'Date is required.'
-
-        if error:
-            flash(error)
-        else:
-            db = get_db()
-            db.execute(
-                "INSERT INTO task (title, author_id, comment, due_date)"
-                " VALUES (?, ?, ?, ?)",
-                (title, g.user['id'], comment, due_date)
-            )
-            db.commit()
-            days = 0
-            if repeat == "every day":
-                days = 1
-            elif repeat == "every week":
-                days = 7
-            elif repeat == "every month":
-                days = 30
-            elif repeat == "every year":
-                days = 365
-
-            if days > 0:
-                new_date = datetime.strptime(due_date, '%Y-%m-%d')
-                for _ in range(10):
-                    new_date += timedelta(days=days)
-                    db.execute(
-                        "INSERT INTO task (title, author_id, comment, due_date)"
-                        " VALUES (?, ?, ?, ?)",
-                        (title, g.user['id'], comment, new_date.strftime("%Y-%m-%d"))
-                    )
-                    db.commit()
-
+        return redirect(url_for('task.create', currentdate=firstdate, request=request), code=307)
 
     db = get_db()
     tasks_all = []
@@ -93,33 +52,52 @@ def get_list(userid, firstdate):
         tasks_all.append(tasks)
     return render_template('index.html', tasks=tasks_all, firstdate=firstdate)
 
-@bp.route('/create', methods=('GET', 'POST'))
+@bp.route('/<currentdate>/create', methods=('GET', 'POST'))
 @login_required
-def create():
-    if request.method == 'POST':
-        title = request.form['title']
-        comment = request.form['comment']
-        due_date = request.form['due_date']
-        error = ""
+def create(currentdate):
+    title = request.form['title']
+    comment = request.form['comment']
+    due_date = request.form['due_date']
+    repeat = request.form['repeat'].lower()
+    error = ""
 
-        if not title:
-            error = 'Title is required. '
-        if not due_date:
-            error += 'Date is required.'
+    if not title:
+        error = 'Title is required. '
+    if not due_date:
+        error += 'Date is required.'
 
-        if error:
-            flash(error)
-        else:
-            db = get_db()
-            db.execute(
-                'INSERT INTO task (title, author_id, comment)'
-                ' VALUES (?, ?, ?)',
-                (title, g.user['id'], comment)
-            )
-            db.commit()
-            return redirect(url_for('task.index'))
+    if error:
+        flash(error)
+    else:
+        db = get_db()
+        db.execute(
+            "INSERT INTO task (title, author_id, comment, due_date)"
+            " VALUES (?, ?, ?, ?)",
+            (title, g.user['id'], comment, due_date)
+        )
+        db.commit()
+        days = 0
+        if repeat == "every day":
+            days = 1
+        elif repeat == "every week":
+            days = 7
+        elif repeat == "every month":
+            days = 30
+        elif repeat == "every year":
+            days = 365
 
-    return render_template('index.html')
+        if days > 0:
+            new_date = datetime.strptime(due_date, '%Y-%m-%d')
+            for _ in range(10):
+                new_date += timedelta(days=days)
+                db.execute(
+                    "INSERT INTO task (title, author_id, comment, due_date)"
+                    " VALUES (?, ?, ?, ?)",
+                    (title, g.user['id'], comment, new_date.strftime("%Y-%m-%d"))
+                )
+                db.commit()
+
+    return redirect(url_for('task.get_list', userid=g.user['id'], firstdate=currentdate))
 
 
 def get_post(id, check_author=True):
