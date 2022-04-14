@@ -40,6 +40,7 @@ def get_list(userid, firstdate):
         title = request.form['title']
         comment = request.form['comment']
         due_date = request.form['due_date']
+        repeat = request.form['repeat'].lower()
         error = ""
 
         if not title:
@@ -57,6 +58,27 @@ def get_list(userid, firstdate):
                 (title, g.user['id'], comment, due_date)
             )
             db.commit()
+            days = 0
+            if repeat == "every day":
+                days = 1
+            elif repeat == "every week":
+                days = 7
+            elif repeat == "every month":
+                days = 30
+            elif repeat == "every year":
+                days = 365
+
+            if days > 0:
+                new_date = datetime.strptime(due_date, '%Y-%m-%d')
+                for _ in range(10):
+                    new_date += timedelta(days=days)
+                    db.execute(
+                        "INSERT INTO task (title, author_id, comment, due_date)"
+                        " VALUES (?, ?, ?, ?)",
+                        (title, g.user['id'], comment, new_date.strftime("%Y-%m-%d"))
+                    )
+                    db.commit()
+
 
     db = get_db()
     tasks_all = []
