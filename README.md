@@ -22,5 +22,4 @@ http://127.0.0.1:5000/hello
 
 http://127.0.0.1:5000/auth/register
 http://127.0.0.1:5000/auth/login
-http://127.0.0.1:5000/auth/
-
+http://127.0.0.1:5000/auth/logout
