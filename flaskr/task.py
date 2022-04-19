@@ -88,7 +88,7 @@ def create(currentdate):
 
         if days > 0:
             new_date = datetime.strptime(due_date, '%Y-%m-%d')
-            for _ in range(10):
+            for _ in range(9):
                 new_date += timedelta(days=days)
                 db.execute(
                     "INSERT INTO task (title, author_id, comment, due_date)"
